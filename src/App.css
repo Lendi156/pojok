@@ -1,11 +1,3 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
@@ -15,17 +7,57 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: calc(10px + 2vmin);
   color: white;
+  padding: 0 30px;
 }
 
 .App-link {
   color: #61dafb;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px;
+}
+
+aside {
+  flex-grow: 1;
+  width: min-content;
+}
+
+.aside-topics {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.content-main {
+  flex-grow: 2;
+  width: min-content;
+}
+
+.content-main-comments input{
+  display: block;
+}
+
+section button{
+  height: min-content;
+}
+
+.card {
+  display: flex;
+}
+
+.button {
+  background-color:none;
+}
+
+.buttonOn {
+  background-color: #61dafb;
 }
 
 @keyframes App-logo-spin {
