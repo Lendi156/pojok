@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 import React from 'react';
 import { Grid } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -14,20 +15,47 @@ const useStyles = makeStyles({
     display: 'grid',
   },
   heroImg: {
-    width: '100%',
     zIndex: '0',
+    height: '534px',
     position: 'absolute',
+    objectFit: 'cover',
+    objectPosition: 'right bottom',
+    right: '0',
+    ['@media (max-width:1180px)']: {
+      right: '-100px',
+    },
+    ['@media (max-width:885px)']: {
+      right: '-150px',
+    },
+    ['@media (max-width:769px)']: {
+      height: '334px',
+      right: '-40px',
+    },
+    ['@media (max-width:550px)']: {
+      left: '0',
+      height: '270px',
+      right: 'unset',
+    },
   },
   heroContent: {
     zIndex: '2',
     position: 'absolute',
-    margin: '72px 0 0 112px',
+    margin: '64px 0 0 64px',
     maxWidth: '55vw',
+    ['@media (max-width:769px)']: {
+      margin: '32px 0 0 32px',
+    },
+    ['@media (max-width:550px)']: {
+      maxWidth: 'unset',
+    },
   },
   heroContentDesc: {
     fontSize: '1.25rem',
     fontWeight: '400',
     marginTop: '48px',
+    ['@media (max-width:769px)']: {
+      marginTop: '24px',
+    },
   },
   main: {
     position: 'relative',
@@ -52,9 +80,8 @@ function HomePage() {
           <Typography style={{ fontSize: '4.768rem', lineHeight: '100%', fontFamily: 'Lora' }}>
             Risus suscipit purus.
           </Typography>
-          <h2 style={{ fontSize: '1.25rem', fontWeight: '400', marginTop: '48px' }}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. In vivamus
-            nunc mauris aenean ullamcorper odio malesuada risus, velit.
+          <h2 className={classes.heroContentDesc}>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           </h2>
         </div>
       </div>
