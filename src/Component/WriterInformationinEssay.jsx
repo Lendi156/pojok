@@ -1,9 +1,10 @@
+/* eslint-disable no-useless-computed-key */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
-import { Avatar } from '@mui/material';
+import { Avatar, useMediaQuery } from '@mui/material';
 import { writerFound } from '../Redux/writerFilter';
 
 const useStyles = makeStyles({
@@ -14,9 +15,20 @@ const useStyles = makeStyles({
     alignItems: 'center',
     borderTop: '2px solid black',
     borderBottom: '2px solid black',
+    ['@media (max-width:769px)']: {
+      margin: '24px 0',
+      padding: '18px 0',
+    },
+    ['@media (max-width:550px)']: {
+      margin: '16px 0',
+      padding: '14px 0',
+    },
   },
   essayAvatar: {
     marginRight: '24px',
+    ['@media (max-width:769px)']: {
+      marginRight: '12px',
+    },
   },
   essayWriter: {
     textDecoration: 'none',
@@ -24,6 +36,9 @@ const useStyles = makeStyles({
     fontWeight: 'bold',
     marginBottom: '16px',
     display: 'block',
+    ['@media (max-width:769px)']: {
+      marginBottom: '8px',
+    },
   },
   essayWriterDetail: {
     fontSize: '0.64rem',
@@ -39,10 +54,28 @@ export default function WriterInformationinEssay({ essay }) {
 
   // Styling Component
   const classes = useStyles();
+
+  const tab = useMediaQuery('(max-width:769px)');
+
+  const mediaQuery = () => {
+    if (tab === true) {
+      return '50px';
+    }
+    return '90px';
+  };
+
   return (
     <>
       <div className={classes.essayWriterDetailContainer}>
-        <Avatar alt={essay.writer} src="" className={classes.essayAvatar} style={{ height: '90px', width: '90px' }} />
+        <Avatar
+          alt={essay.writer}
+          src=""
+          className={classes.essayAvatar}
+          style={{
+            height: mediaQuery(),
+            width: mediaQuery(),
+          }}
+        />
         <div>
           <a
             href="/Writer"

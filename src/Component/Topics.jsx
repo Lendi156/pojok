@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
@@ -12,6 +13,9 @@ const useStyles = makeStyles({
     padding: '0 12px',
     cursor: 'pointer',
     margin: '0 8px 8px 0',
+    ['@media (max-width:769px)']: {
+      height: '24px',
+    },
   },
   tagOn: {
     fontSize: '0.64rem',
@@ -23,6 +27,9 @@ const useStyles = makeStyles({
     backgroundColor: 'black',
     color: 'white',
     margin: '0 8px 8px 0',
+    ['@media (max-width:769px)']: {
+      height: '24px',
+    },
   },
 });
 

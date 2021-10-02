@@ -1,7 +1,8 @@
+/* eslint-disable no-useless-computed-key */
 import React, { useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
-import { Button, Input } from '@mui/material';
+import { Button, Input, useMediaQuery } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { addComment } from '../Redux/likeandComment';
 
@@ -13,33 +14,60 @@ const useStyles = makeStyles({
   commentInputContainer: {
     display: 'flex',
     flexDirection: 'column',
-    margin: '24px 0 48px 0',
+    margin: '24px 0 48px',
     alignItems: 'center',
     padding: '48px',
+    ['@media (max-width:769px)']: {
+      padding: '24px',
+    },
+    ['@media (max-width:550px)']: {
+      padding: '16px',
+    },
   },
   commentInputFieldName: {
     borderBottom: '2px solid black',
     width: '100%',
     marginBottom: '24px',
     padding: '0 16px',
+    ['@media (max-width:550px)']: {
+      marginBottom: '16px',
+    },
   },
   commentInputFieldComment: {
     borderBottom: '2px solid black',
     width: '100%',
     marginBottom: '48px',
     padding: '0 16px',
+    ['@media (max-width:769px)']: {
+      marginBottom: '24px',
+    },
+    ['@media (max-width:550px)']: {
+      marginBottom: '16px',
+    },
   },
   commentNameandFillContainer: {
     paddingTop: '48px',
+    ['@media (max-width:769px)']: {
+      paddingTop: '24px',
+    },
+    ['@media (max-width:550px)']: {
+      paddingTop: '16px',
+    },
   },
   commentName: {
     fontSize: '0.8rem',
     fontWeight: 'bold',
     marginBottom: '8px',
+    ['@media (max-width:769px)']: {
+      marginBottom: '4px',
+    },
   },
   commentFill: {
     fontSize: '0.8rem',
     marginBottom: '24px',
+    ['@media (max-width:769px)']: {
+      marginBottom: '12px',
+    },
   },
 });
 
@@ -69,6 +97,16 @@ function Comment() {
       </>,
     );
   });
+
+  const tab = useMediaQuery('(max-width:1200px)');
+
+  const mediaQuery = () => {
+    if (tab === true) {
+      return '40vw';
+    }
+    return '20vw';
+  };
+
   return (
     <>
       <h2 className={classes.commentTitle}>Komentar</h2>
@@ -83,8 +121,9 @@ function Comment() {
         <Button
           variant="contained"
           onClick={() => { commentAdded(); }}
+          disableElevation
           style={{
-            fontSize: '0.64rem', borderRadius: '20px', backgroundColor: 'black', fontFamily: 'Lato', textTransform: 'capitalize',
+            fontSize: '0.64rem', borderRadius: '20px', backgroundColor: 'black', fontFamily: 'Lato', textTransform: 'capitalize', width: mediaQuery(),
           }}
         >
           Tambah Komentar

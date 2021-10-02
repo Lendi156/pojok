@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 /* eslint-disable max-len */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -19,11 +20,22 @@ const useStyles = makeStyles({
   main: {
     position: 'relative',
     zIndex: '0',
-    padding: '72px 112px 36px',
+    padding: '64px',
+    ['@media (max-width:769px)']: {
+      padding: '32px',
+    },
+    ['@media (max-width:550px)']: {
+      padding: '16px',
+    },
   },
   title: {
     fontSize: '1.953rem',
-    margin: '0 0 24px',
+    marginBottom: '24px',
+    fontWeight: '700',
+    ['@media (max-width:769px)']: {
+      fontSize: '1.72rem',
+      marginBottom: '8px',
+    },
   },
   essayTitle: {
     fontSize: '2.441rem',
@@ -38,6 +50,12 @@ const useStyles = makeStyles({
     lineHeight: '160%',
     margin: '24px 0 64px',
     fontFamily: 'Lora',
+    ['@media (max-width:769px)']: {
+      margin: '16px 0 32px',
+    },
+    ['@media (max-width:550px)']: {
+      margin: '8px 0 16px',
+    },
   },
 });
 
@@ -57,7 +75,7 @@ function EssayPage() {
 
   return (
     <>
-      <Grid container className={classes.main} columnSpacing={4}>
+      <Grid container className={classes.main} columnSpacing={4} rowSpacing={{ xs: 2, md: 6 }}>
         <Grid item lg={8}>
           <EssayTitleandWriter essay={filteredEssays[0]} />
           <article>
@@ -78,7 +96,7 @@ function EssayPage() {
             <WriterInformationinEssay essay={filteredEssays[0]} />
           </section>
 
-          <section className="content-main-comments">
+          <section>
             <Comment />
           </section>
         </Grid>

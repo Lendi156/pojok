@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 /* eslint-disable max-len */
 import React from 'react';
 import { useSelector } from 'react-redux';
@@ -11,11 +12,22 @@ const useStyles = makeStyles({
   main: {
     position: 'relative',
     zIndex: '0',
-    padding: '36px 112px',
+    padding: '64px',
+    ['@media (max-width:769px)']: {
+      padding: '32px',
+    },
+    ['@media (max-width:550px)']: {
+      padding: '16px',
+    },
   },
   title: {
     fontSize: '1.953rem',
-    margin: '0 0 48px',
+    marginBottom: '24px',
+    fontWeight: '700',
+    ['@media (max-width:769px)']: {
+      fontSize: '1.72rem',
+      marginBottom: '8px',
+    },
   },
 });
 
@@ -26,31 +38,20 @@ function TagFilterPage() {
   const classes = useStyles();
   return (
     <>
-      <Grid container className={classes.main}>
+      <Grid container className={classes.main} direction="row-reverse" sx={{ justifyContent: 'flex-end' }} columnSpacing={4} rowSpacing={{ xs: 2, md: 4 }}>
+        <Grid item lg={4}>
+          <h3 className={classes.title}>Topics</h3>
+          <Topics />
+        </Grid>
         <Grid item lg={8}>
           <h1 className={classes.title}>
             Tag:&nbsp;
             {tagLabel}
           </h1>
-          <EssayCard className={classes.mainList} data={filter} />
-        </Grid>
-        <Grid item lg={4}>
-          <h3 className={classes.title}>Topics</h3>
-          <Topics />
+          <EssayCard data={filter} />
         </Grid>
       </Grid>
 
-      {/* <div className="content">
-        <div className="content-main">
-          <div>
-            <EssayCard data={filter} />
-          </div>
-        </div>
-        <aside>
-          <h3>Topics</h3>
-          <Topics />
-        </aside>
-      </div> */}
     </>
   );
 }

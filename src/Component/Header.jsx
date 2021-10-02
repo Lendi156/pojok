@@ -32,6 +32,9 @@ const useStyles = makeStyles(() => ({
     ['@media (max-width:769px)']: {
       margin: '0 32px',
     },
+    ['@media (max-width:550px)']: {
+      margin: '0 16px',
+    },
   },
   search: {
     border: '2px solid black',

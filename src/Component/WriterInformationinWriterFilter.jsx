@@ -1,7 +1,8 @@
+/* eslint-disable no-useless-computed-key */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { makeStyles } from '@mui/styles';
-import { Avatar } from '@mui/material';
+import { Avatar, useMediaQuery } from '@mui/material';
 
 const useStyles = makeStyles({
   essayWriterDetailContainer: {
@@ -27,10 +28,27 @@ const useStyles = makeStyles({
 export default function WriterInformationinWriterFilter({ name, detail }) {
   // Styling Component
   const classes = useStyles();
+  const tab = useMediaQuery('(max-width:769px)');
+
+  const mediaQuery = () => {
+    if (tab === true) {
+      return '60px';
+    }
+    return '120px';
+  };
+
   return (
     <>
       <div className={classes.essayWriterDetailContainer}>
-        <Avatar alt={name} src="" className={classes.essayAvatar} style={{ height: '120px', width: '120px' }} />
+        <Avatar
+          alt={name}
+          src=""
+          className={classes.essayAvatar}
+          style={{
+            height: mediaQuery(),
+            width: mediaQuery(),
+          }}
+        />
         <div>
           <p className={classes.essayWriter}>{name}</p>
           <p className={classes.essayWriterDetail}>{detail.writerDetail}</p>

@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -11,28 +12,71 @@ import { writerFound } from '../Redux/writerFilter';
 import CardTag from './CardTag';
 
 const useStyles = makeStyles({
-  containerList: {
+  containerListandButton: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
   },
+  containerList: {
+    marginBottom: '40px',
+    ['@media (max-width:769px)']: {
+      marginBottom: '8px',
+    },
+    ['@media (max-width:550px)']: {
+      marginBottom: '0',
+    },
+  },
   card: {
     display: 'flex',
-    margin: '0 24px 24px 0',
+    margin: '0 0 24px 0',
+  },
+  cardImage: {
+    maxWidth: '310px',
+    width: '100%',
+    height: 'auto',
+    ['@media (max-width:650px)']: {
+      maxWidth: '250px',
+    },
+    ['@media (max-width:550px)']: {
+      maxWidth: '150px',
+    },
+    ['@media (max-width:375px)']: {
+      maxWidth: '125px',
+    },
+  },
+  cardContent: {
+    marginLeft: '16px',
+    ['@media (max-width:375px)']: {
+      marginLeft: '8px',
+    },
   },
   cardTitle: {
     fontSize: '1.25rem',
     fontWeight: '700',
+    ['@media (max-width:550px)']: {
+      fontSize: '1.2rem',
+    },
+    ['@media (max-width:375px)']: {
+      fontSize: '1.067rem',
+    },
   },
   essayWriterandDateContainer: {
     display: 'flex',
     margin: '16px 0',
     alignItems: 'center',
+    ['@media (max-width:550px)']: {
+      margin: '8px 0',
+    },
   },
   cardWriter: {
     fontSize: '0.64rem',
     textDecoration: 'none',
     color: 'black',
+    display: 'initial',
+    position: 'relative',
+    ['@media (max-width:375px)']: {
+      display: 'none',
+    },
   },
   cardWriterBold: {
     fontSize: '0.64rem',
@@ -40,9 +84,21 @@ const useStyles = makeStyles({
   },
   cardDateIcon: {
     margin: '0 8px 0 24px',
+    ['@media (max-width:550px)']: {
+      margin: '0 4px 0 16px',
+    },
+    ['@media (max-width:375px)']: {
+      maxWidth: '125px',
+      margin: '0 4px 0 0',
+    },
   },
   cardDate: {
     fontSize: '0.64rem',
+  },
+  cardSummary: {
+    ['@media (max-width:550px)']: {
+      display: 'none',
+    },
   },
   loadMore: {
     width: '40%',
@@ -90,8 +146,8 @@ export default function EssayCard({ data }) {
     essayCardList.push(
       <Link to="/Essay" style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>
         <div className={classes.card} id={essay.id} key={essay.id}>
-          <img src={logo} alt="logo" width="310" heigt="215" />
-          <div className="card-content">
+          <img src={logo} alt="logo" className={classes.cardImage} />
+          <div className={classes.cardContent}>
             <h2 className={classes.cardTitle}>{essay.title}</h2>
             <div className={classes.essayWriterandDateContainer}>
               <a className={classes.cardWriter} href="/Writer" onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}>
@@ -105,7 +161,7 @@ export default function EssayCard({ data }) {
                 {essay.date}
               </p>
             </div>
-            <p>{essay.summary}</p>
+            <p className={classes.cardSummary}>{essay.summary}</p>
             <CardTag className={classes.cardTag} essay={essay} />
           </div>
         </div>
@@ -116,13 +172,15 @@ export default function EssayCard({ data }) {
 
   return (
     <>
-      <div className={classes.containerList}>
-        {essayCardList}
+      <div className={classes.containerListandButton}>
+        <div className={classes.containerList}>
+          {essayCardList}
+        </div>
         <Button
           variant="outlined"
           className={classes.loadMore}
           style={{
-            fontSize: '0.64rem', borderRadius: '0', borderColor: 'black', color: 'black', marginTop: '64px', fontFamily: 'Lato', textTransform: 'capitalize',
+            fontSize: '0.64rem', borderRadius: '0', borderColor: 'black', color: 'black', fontFamily: 'Lato', textTransform: 'capitalize',
           }}
           onClick={handleShowMorePosts}
         >

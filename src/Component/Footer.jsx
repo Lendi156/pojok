@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 
@@ -8,14 +9,27 @@ const useStyles = makeStyles({
     width: '100%',
     backgroundColor: 'black',
     height: '176px',
-    marginTop: '64px',
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: '0 112px',
+    padding: '0 64px',
+    ['@media (max-width:769px)']: {
+      padding: '0 32px',
+      height: '144px',
+    },
+    ['@media (max-width:550px)']: {
+      padding: '0 16px',
+      height: '112px',
+    },
   },
   link: {
-    marginBottom: '36px',
+    marginBottom: '32px',
+    ['@media (max-width:769px)']: {
+      marginBottom: '16px',
+    },
+    ['@media (max-width:550px)']: {
+      marginBottom: '8px',
+    },
   },
   linkText: {
     color: 'white',
@@ -23,8 +37,14 @@ const useStyles = makeStyles({
   },
   copyright: {
     color: 'white',
-    marginTop: '36px',
+    marginTop: '32px',
     fontSize: '0.8rem',
+    ['@media (max-width:769px)']: {
+      marginTop: '16px',
+    },
+    ['@media (max-width:550px)']: {
+      marginTop: '8px',
+    },
   },
 });
 

@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-computed-key */
 import React from 'react';
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import Hero from '../Public/Hero.jpg';
@@ -40,14 +40,20 @@ const useStyles = makeStyles({
   heroContent: {
     zIndex: '2',
     position: 'absolute',
-    margin: '64px 0 0 64px',
+    margin: '64px 64px 0',
     maxWidth: '55vw',
     ['@media (max-width:769px)']: {
-      margin: '32px 0 0 32px',
+      margin: '32px 32px 0',
     },
     ['@media (max-width:550px)']: {
+      margin: '16px 16px 0',
       maxWidth: 'unset',
     },
+  },
+  heroContentTitle: {
+    fontSize: '4.768rem',
+    lineHeight: '100%',
+    fontFamily: 'Lora',
   },
   heroContentDesc: {
     fontSize: '1.25rem',
@@ -60,24 +66,35 @@ const useStyles = makeStyles({
   main: {
     position: 'relative',
     zIndex: '0',
-    padding: '570px 112px 36px',
+    padding: '570px 64px 64px',
+    ['@media (max-width:769px)']: {
+      padding: '358px 32px 32px',
+    },
+    ['@media (max-width:550px)']: {
+      padding: '286px 16px 16px',
+    },
   },
   title: {
     fontSize: '1.953rem',
     marginBottom: '24px',
     fontWeight: '700',
+    ['@media (max-width:769px)']: {
+      fontSize: '1.72rem',
+      marginBottom: '8px',
+    },
   },
 });
 
 function HomePage() {
   // Styling Component
+  const mobile = useMediaQuery('(max-width:550px)');
   const classes = useStyles();
   return (
     <>
       <div className={classes.hero}>
         <img src={Hero} alt="hero" className={classes.heroImg} />
         <div className={classes.heroContent}>
-          <Typography style={{ fontSize: '4.768rem', lineHeight: '100%', fontFamily: 'Lora' }}>
+          <Typography style={{ fontSize: mobile ? '3.815rem' : '4.768rem', lineHeight: '100%', fontFamily: 'Lora' }}>
             Risus suscipit purus.
           </Typography>
           <h2 className={classes.heroContentDesc}>
@@ -85,14 +102,14 @@ function HomePage() {
           </h2>
         </div>
       </div>
-      <Grid container className={classes.main} columnSpacing={4}>
-        <Grid item lg={8}>
-          <h1 className={classes.title}>Essays</h1>
-          <EssayCard data={detail} />
-        </Grid>
+      <Grid container className={classes.main} direction="row-reverse" columnSpacing={4} rowSpacing={{ xs: 2, md: 4 }} sx={{ justifyContent: 'flex-end' }}>
         <Grid item lg={4}>
           <h1 className={classes.title}>Topics</h1>
           <Topics />
+        </Grid>
+        <Grid item lg={8}>
+          <h1 className={classes.title}>Essays</h1>
+          <EssayCard data={detail} />
         </Grid>
       </Grid>
 

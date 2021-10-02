@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import './App.css';
@@ -19,6 +20,12 @@ const useStyles = makeStyles({
     minHeight: '100vh',
     position: 'relative',
     paddingBottom: '176px',
+    ['@media (max-width:769px)']: {
+      paddingBottom: '144px',
+    },
+    ['@media (max-width:550px)']: {
+      paddingBottom: '112px',
+    },
   },
 });
 

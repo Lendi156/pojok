@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-computed-key */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useDispatch } from 'react-redux';
@@ -12,7 +13,10 @@ const useStyles = makeStyles({
     height: '32px',
     padding: '0 12px',
     cursor: 'pointer',
-    margin: '0 8px 48px 0',
+    margin: '0 8px 8px 0',
+    ['@media (max-width:769px)']: {
+      height: '24px',
+    },
   },
 });
 
