@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Button } from '@mui/material';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import logo from '../logo.svg';
+import EssayImage from '../Public/EssayImage.jpg';
 import { idFound } from '../Redux/openEssay';
 import { writerFound } from '../Redux/writerFilter';
 import CardTag from './CardTag';
@@ -33,6 +33,7 @@ const useStyles = makeStyles({
   cardImage: {
     maxWidth: '310px',
     width: '100%',
+    objectFit: 'cover',
     height: 'auto',
     ['@media (max-width:650px)']: {
       maxWidth: '250px',
@@ -146,7 +147,7 @@ export default function EssayCard({ data }) {
     essayCardList.push(
       <Link to="/Essay" style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>
         <div className={classes.card} id={essay.id} key={essay.id}>
-          <img src={logo} alt="logo" className={classes.cardImage} />
+          <img src={EssayImage} alt="hero" className={classes.cardImage} />
           <div className={classes.cardContent}>
             <h2 className={classes.cardTitle}>{essay.title}</h2>
             <div className={classes.essayWriterandDateContainer}>

@@ -5,7 +5,8 @@ import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import logo from '../logo.svg';
+import AvatarImage from '../Public/Avatar.png';
+import EssayImage from '../Public/EssayImage.jpg';
 import { writerFound } from '../Redux/writerFilter';
 
 const useStyles = makeStyles({
@@ -43,6 +44,7 @@ const useStyles = makeStyles({
     width: '100%',
     height: 'auto',
     maxHeight: '412px',
+    objectFit: 'cover',
   },
   essayImageCaption: {
     fontSize: '0.64rem',
@@ -75,7 +77,7 @@ export default function EssayTitleandWriter({ essay }) {
       <div className={classes.essayWriterandDateContainer}>
         <Avatar
           alt={essay.writer}
-          src=""
+          src={AvatarImage}
           className={classes.essayAvatar}
           style={{
             height: mediaQuery(),
@@ -88,7 +90,7 @@ export default function EssayTitleandWriter({ essay }) {
           {essay.date}
         </p>
       </div>
-      <img className={classes.essayImage} src={logo} alt="penulis" height="100" />
+      <img className={classes.essayImage} src={EssayImage} alt="penulis" height="100" />
       <p className={classes.essayImageCaption}>
         Lulusan arsitektur yang sering diabaikan dan jasanya
       </p>

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import logo from '../logo.svg';
+import EssayImage from '../Public/EssayImage.jpg';
 import { idFound } from '../Redux/openEssay';
 import relatedFilter from '../Utils/relatedFilter';
 
@@ -18,6 +18,7 @@ const useStyles = makeStyles({
     width: '100%',
     maxWidth: '125px',
     height: 'auto',
+    objectFit: 'cover',
     ['@media (max-width:1200px)']: {
       maxWidth: '310px',
     },
@@ -82,7 +83,7 @@ export default function SideEssayCard({ data, firstTag }) {
     essayCardList.push(
       <Link to="/Essay" style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>
         <div className={classes.card} id={essay.id} key={essay.id}>
-          <img src={logo} alt="logo" className={classes.cardImage} />
+          <img src={EssayImage} alt="logo" className={classes.cardImage} />
           <div>
             <p className={classes.cardTitle}>{essay.title}</p>
             <div className={classes.cardDateContainer}>

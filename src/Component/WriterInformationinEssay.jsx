@@ -5,6 +5,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
+import AvatarImage from '../Public/Avatar.png';
 import { writerFound } from '../Redux/writerFilter';
 
 const useStyles = makeStyles({
@@ -69,7 +70,7 @@ export default function WriterInformationinEssay({ essay }) {
       <div className={classes.essayWriterDetailContainer}>
         <Avatar
           alt={essay.writer}
-          src=""
+          src={AvatarImage}
           className={classes.essayAvatar}
           style={{
             height: mediaQuery(),

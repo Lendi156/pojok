@@ -102,6 +102,10 @@ export default function Header() {
   const handleClickAway = () => {
     setMobile(false);
   };
+
+  function locations() {
+    window.location.href = '/';
+  }
   // Styling Component
   const classes = useStyles();
   return (
@@ -109,26 +113,28 @@ export default function Header() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" elevation={0}>
           <Toolbar className={classes.toolBar} disableGutters="false">
-            <Typography
-              variant="h1"
-              noWrap
-              component="div"
-              sx={{
-                display: 'block',
-                color: 'black',
-                fontSize: '2.441rem',
-                fontFamily: 'Lato',
-                fontWeight: '300',
-                letterSpacing: '-0.065em',
-                width: '100%',
-                zIndex: '0',
-                ['@media (max-width:600px)']: {
-                  textAlign: 'center',
-                },
-              }}
-            >
-              POJOK
-            </Typography>
+            <IconButton onClick={() => { locations(); }} disableRipple="true" disableFocusRipple="true" style={{ backgroundColor: 'transparent' }}>
+              <Typography
+                variant="h1"
+                noWrap
+                component="div"
+                sx={{
+                  display: 'block',
+                  color: 'black',
+                  fontSize: '2.441rem',
+                  fontFamily: 'Lato',
+                  fontWeight: '300',
+                  letterSpacing: '-0.065em',
+                  width: '100%',
+                  zIndex: '0',
+                  ['@media (max-width:600px)']: {
+                    textAlign: 'center',
+                  },
+                }}
+              >
+                POJOK
+              </Typography>
+            </IconButton>
             <ClickAwayListener onClickAway={() => { handleClickAway(); }}>
               <div className={classes.searchContainer}>
                 <div className={mobile ? classes.searchIconMobile : classes.searchIcon}>
