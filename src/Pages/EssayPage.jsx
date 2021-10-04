@@ -67,9 +67,14 @@ function EssayPage() {
 
   // save like and comment data from datasource to redux store
   useEffect(() => {
+    // document.body.scrollTop = 0;
     dispatch(saveLike(filteredEssays[0].like));
     dispatch(saveComment(filteredEssays[0].comment));
   }, []);
+
+  useEffect(() => {
+    document.body.scrollTop = 0;
+  });
 
   // Styling Component
   const classes = useStyles();
