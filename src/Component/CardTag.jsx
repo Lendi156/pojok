@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { tagFound, toggleChip } from '../Redux/tagFilter';
-import handleButtonClickInsideCard from '../Utils/handleButtonClickInsideCard';
 
 const useStyles = makeStyles({
   cardTag: {
@@ -25,10 +24,12 @@ const useStyles = makeStyles({
 export default function CardTag({ essay }) {
   const dispatch = useDispatch();
   const history = useHistory();
+  // save label value to redux store and go to filter page
   const tagClick = (label) => {
     dispatch(tagFound(label));
     history.push('/Filter');
   };
+  // save label value to the store to change data source status
   const handleToggle = (id) => {
     dispatch(toggleChip(id));
   };
@@ -44,7 +45,7 @@ export default function CardTag({ essay }) {
         onClick={(nativeEvent) => {
           tagClick(essay.tag[0].label);
           handleToggle(essay.tag[0].label);
-          handleButtonClickInsideCard(nativeEvent);
+          nativeEvent.stopPropagation();
         }}
       >
         {essay.tag[0].label}

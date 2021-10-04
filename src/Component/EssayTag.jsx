@@ -23,21 +23,21 @@ const useStyles = makeStyles({
 
 function EssayTag({ tag }) {
   const dispatch = useDispatch();
+  // array to render tag components
   const topicList = [];
-  // function to open tag filter page
+  // save tag label data to redux store and go to tag filter page
   const history = useHistory();
   const tagClick = (label) => {
     dispatch(tagFound(label));
     history.push('/Filter');
   };
-
+  // save label value to the store to change data source status
   const handleToggle = (id) => {
     dispatch(toggleChip(id));
   };
 
-  // Styling Component
+  // Styling component. Make tag list component from data source
   const classes = useStyles();
-
   tag.forEach((top) => {
     topicList.push(<button key={top.label} className={classes.cardTag} type="button" onClick={() => { tagClick(top.label); handleToggle(top.label); }}>{top.label}</button>);
   });

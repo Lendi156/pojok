@@ -31,6 +31,7 @@ const useStyles = makeStyles({
 });
 
 function SearchResultPage() {
+  // Get search data from redux store
   const searchResult = useSelector((state) => state.search.list);
   const searchKeyword = useSelector((state) => state.search.keyword);
   // Styling Component
@@ -54,21 +55,6 @@ function SearchResultPage() {
           })()}
         </Grid>
       </Grid>
-      {/* <div className="content">
-        <div className="content-main">
-          <div className="content-main-cardContainer">
-            { (() => {
-              if (searchResult.length === 0) { return <h3>artikel tidak ditemukan</h3>; }
-              return <EssayCard data={searchResult} />;
-            })()}
-          </div>
-          <button type="button">Muat lebih banyak</button>
-        </div>
-        <aside>
-          <h3>Topics</h3>
-          <Topics />
-        </aside>
-      </div> */}
     </>
   );
 }

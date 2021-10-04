@@ -36,24 +36,24 @@ const useStyles = makeStyles({
 
 function Topics() {
   const dispatch = useDispatch();
+  // get tag label data from redux store
   const tagLabel = useSelector((state) => state.tagFilter.tags);
-  // eslint-disable-next-line no-unused-vars
+  // array to render tag component,
   const topicList = [];
   const history = useHistory();
+  // save tag label data to redux store and go to tag filter page
   const tagClick = (label) => {
     dispatch(tagFound(label));
     history.push('/Filter');
   };
-
+  // save label value to the store to change data source status
   const handleToggle = (id) => {
     dispatch(toggleChip(id));
   };
 
-  // Styling Component
+  // Styling component. Make topic component from data source
   const classes = useStyles();
-
   tagLabel.forEach((topic) => {
-    // eslint-disable-next-line no-unused-vars
     topicList.push(
       <button className={topic.status ? classes.tagOn : classes.tag} key={topic.label} type="button" onClick={() => { tagClick(topic.label); handleToggle(topic.label); }}>
         {topic.label}

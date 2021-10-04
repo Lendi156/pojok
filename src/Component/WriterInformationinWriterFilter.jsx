@@ -4,6 +4,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
 import AvatarImage from '../Public/Avatar.png';
+import mediaQuery from '../Utils/mediaQuery';
 
 const useStyles = makeStyles({
   essayWriterDetailContainer: {
@@ -27,16 +28,9 @@ const useStyles = makeStyles({
 });
 
 export default function WriterInformationinWriterFilter({ name, detail }) {
-  // Styling Component
+  // Styling Component. Change Avatar styling based on device width
   const classes = useStyles();
   const tab = useMediaQuery('(max-width:769px)');
-
-  const mediaQuery = () => {
-    if (tab === true) {
-      return '60px';
-    }
-    return '120px';
-  };
 
   return (
     <>
@@ -46,8 +40,8 @@ export default function WriterInformationinWriterFilter({ name, detail }) {
           src={AvatarImage}
           className={classes.essayAvatar}
           style={{
-            height: mediaQuery(),
-            width: mediaQuery(),
+            height: mediaQuery(tab, '60px', '120px'),
+            width: mediaQuery(tab, '60px', '120px'),
           }}
         />
         <div>

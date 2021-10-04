@@ -33,10 +33,11 @@ const useStyles = makeStyles({
 });
 
 function WriterEssaysPage() {
+  // Get writer data from redux store and filter data source using tag data
   const writerName = useSelector((state) => state.writerFilter.writer);
   const filter = writeFilter(writerName);
 
-  // Styling Component
+  // Styling Component. Make topics block invisible in small device
   const classes = useStyles();
   const tab = useMediaQuery('(max-width:1200px)');
 

@@ -65,20 +65,20 @@ const useStyles = makeStyles({
 
 export default function SideEssayCard({ data, firstTag }) {
   const dispatch = useDispatch();
+  // array to render card components
   const essayCardList = [];
 
-  // filter related to article
+  // filter essay from data source based on tag(first tag, second, tag, etc)
   const filter = relatedFilter(data, firstTag);
   const slicedPosts = filter.slice(0, 5);
 
-  // function to get id of card post
+  // save card id to redux store
   const getId = (id) => {
     dispatch(idFound(id));
   };
 
-  // Styling Component
+  // Styling Component. Make card list component from data source
   const classes = useStyles();
-
   slicedPosts.forEach((essay) => {
     essayCardList.push(
       <Link to="/Essay" key={essay.id} style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>

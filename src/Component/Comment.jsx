@@ -5,6 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Button, Input, useMediaQuery } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { addComment } from '../Redux/likeandComment';
+import mediaQuery from '../Utils/mediaQuery';
 
 const useStyles = makeStyles({
   commentTitle: {
@@ -73,11 +74,14 @@ const useStyles = makeStyles({
 
 function Comment() {
   const dispatch = useDispatch();
+  const valueRefName = useRef('');
+  const valueRefComment = useRef('');
+
+  // array to render comment component, get comment data from redux store,
   const commenList = [];
   const comment = useSelector((state) => state.likeandComment.comment);
 
-  const valueRefName = useRef('');
-  const valueRefComment = useRef('');
+  // get comment data, save new comment to redux store, and clear input field
   const commentAdded = () => {
     const newComment = {
       name: valueRefName.current.value,
@@ -87,7 +91,7 @@ function Comment() {
     valueRefName.current.value = '';
     valueRefComment.current.value = '';
   };
-  // Styling Component
+  // Styling Component. Make comment list from data source
   const classes = useStyles();
   comment.forEach((person) => {
     commenList.push(
@@ -99,21 +103,13 @@ function Comment() {
       </>,
     );
   });
-
-  const tab = useMediaQuery('(max-width:1200px)');
-
-  const mediaQuery = () => {
-    if (tab === true) {
-      return '40vw';
-    }
-    return '20vw';
-  };
+  // change button styling based on device width
+  const breakPoint = useMediaQuery('(max-width:1200px)');
 
   return (
     <>
       <h2 className={classes.commentTitle}>Komentar</h2>
       <Paper variant="outlined" square className={classes.commentInputContainer} sx={{ border: '1px solid black' }}>
-        {/* <div className={classes.commentInputContainer}> */}
         <div className={classes.commentInputFieldName}>
           <Input id="inputName" placeholder="Type your name" inputRef={valueRefName} disableUnderline style={{ width: '100%', fontSize: '0.8rem' }} />
         </div>
@@ -125,7 +121,7 @@ function Comment() {
           onClick={() => { commentAdded(); }}
           disableElevation
           style={{
-            fontSize: '0.64rem', borderRadius: '20px', backgroundColor: 'black', fontFamily: 'Lato', textTransform: 'capitalize', width: mediaQuery(),
+            fontSize: '0.64rem', borderRadius: '20px', backgroundColor: 'black', fontFamily: 'Lato', textTransform: 'capitalize', width: mediaQuery(breakPoint, '40vw', '20vw'),
           }}
         >
           Tambah Komentar

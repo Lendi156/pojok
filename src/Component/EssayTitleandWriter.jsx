@@ -9,6 +9,7 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import AvatarImage from '../Public/Avatar.png';
 import EssayImage from '../Public/EssayImage.jpg';
 import { writerFound } from '../Redux/writerFilter';
+import mediaQuery from '../Utils/mediaQuery';
 
 const useStyles = makeStyles({
   essayTitle: {
@@ -56,21 +57,15 @@ const useStyles = makeStyles({
 
 export default function EssayTitleandWriter({ essay }) {
   const dispatch = useDispatch();
+  // save writer data to redux store and stop link propagation
   const handleWriterLink = (writer, e) => {
     dispatch(writerFound(writer));
     e.stopPropagation();
   };
 
-  // Styling Component
+  // Styling Component. Change avatar styling based on device width
   const classes = useStyles();
   const tab = useMediaQuery('(max-width:769px)');
-
-  const mediaQuery = () => {
-    if (tab === true) {
-      return '20px';
-    }
-    return '40px';
-  };
 
   return (
     <>
@@ -81,8 +76,8 @@ export default function EssayTitleandWriter({ essay }) {
           src={AvatarImage}
           className={classes.essayAvatar}
           style={{
-            height: mediaQuery(),
-            width: mediaQuery(),
+            height: mediaQuery(tab, '20px', '40px'),
+            width: mediaQuery(tab, '20px', '40px'),
           }}
         />
         <Link className={classes.essayWriter} to="/Writer" onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}>{essay.writer}</Link>

@@ -61,10 +61,11 @@ const useStyles = makeStyles({
 
 function EssayPage() {
   const dispatch = useDispatch();
+  // get essay id data from redux store and filter data source using essay id data
   const essayID = useSelector((state) => state.open.id);
   const filteredEssays = essayFilter(essayID);
 
-  // like and comment configuration
+  // save like and comment data from datasource to redux store
   useEffect(() => {
     dispatch(saveLike(filteredEssays[0].like));
     dispatch(saveComment(filteredEssays[0].comment));

@@ -21,8 +21,10 @@ const useStyles = makeStyles({
 
 export default function LikeandCommentNumber() {
   const dispatch = useDispatch();
+  // get like and comment data from redux store
   const like = useSelector((state) => state.likeandComment.like);
   const comment = useSelector((state) => state.likeandComment.comment);
+  // add +1 like to the reducx store
   const likeAdded = () => {
     dispatch(addLike());
   };

@@ -8,6 +8,7 @@ import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
 import AvatarImage from '../Public/Avatar.png';
 import { writerFound } from '../Redux/writerFilter';
+import mediaQuery from '../Utils/mediaQuery';
 
 const useStyles = makeStyles({
   essayWriterDetailContainer: {
@@ -49,22 +50,15 @@ const useStyles = makeStyles({
 
 export default function WriterInformationinEssay({ essay }) {
   const dispatch = useDispatch();
+  // save writer data to redux store and stop link propagation
   const handleWriterLink = (writer, e) => {
     dispatch(writerFound(writer));
     e.stopPropagation();
   };
 
-  // Styling Component
+  // Styling Component. Change Avatar styling based on device width
   const classes = useStyles();
-
   const tab = useMediaQuery('(max-width:769px)');
-
-  const mediaQuery = () => {
-    if (tab === true) {
-      return '50px';
-    }
-    return '90px';
-  };
 
   return (
     <>
@@ -74,8 +68,8 @@ export default function WriterInformationinEssay({ essay }) {
           src={AvatarImage}
           className={classes.essayAvatar}
           style={{
-            height: mediaQuery(),
-            width: mediaQuery(),
+            height: mediaQuery(tab, '50px', '90px'),
+            width: mediaQuery(tab, '50px', '90px'),
           }}
         />
         <div>

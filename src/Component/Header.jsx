@@ -13,6 +13,7 @@ import { ClickAwayListener } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { essayFound, displayingResult } from '../Redux/searchEssay';
 import detail from '../Data/DetailEssayData';
+import enterPressed from '../Utils/enterClickSearch';
 
 const useStyles = makeStyles(() => ({
   toolBar: {
@@ -76,7 +77,8 @@ const useStyles = makeStyles(() => ({
 export default function Header() {
   const dispatch = useDispatch();
   const history = useHistory();
-  // Handle input
+  const valueRef = useRef('');
+  // get input value from valueRev, save the value to redux store, and go to search page
   const SearchArticle = async (input) => {
     const keyword = input;
     const filteredEssays = detail
@@ -88,15 +90,10 @@ export default function Header() {
     await dispatch(displayingResult(keyword));
     history.push('/Search');
   };
-  const valueRef = useRef('');
-  const enterPressed = (event) => {
-    const key = event.keyCode || event.which;
-    if (key === 13) {
-      SearchArticle(valueRef.current.value);
-      valueRef.current.value = '';
-    }
-  };
 
+  // styling component. Make search comonent icon exist in mobile device but disapear in desktop
+  // and tab. Search icon control appearance of the search componenet
+  const classes = useStyles();
   const [mobile, setMobile] = useState(false);
   const searchButtonToggle = () => {
     setMobile(true);
@@ -105,17 +102,12 @@ export default function Header() {
     setMobile(false);
   };
 
-  function locations() {
-    history.push('/');
-  }
-  // Styling Component
-  const classes = useStyles();
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" elevation={0}>
           <Toolbar className={classes.toolBar} disableGutters>
-            <IconButton onClick={() => { locations(); }} disableRipple disableFocusRipple style={{ backgroundColor: 'transparent' }}>
+            <IconButton onClick={() => { history.push('/'); }} disableRipple disableFocusRipple style={{ backgroundColor: 'transparent' }}>
               <Typography
                 variant="h1"
                 noWrap
@@ -150,7 +142,9 @@ export default function Header() {
                     inputRef={valueRef}
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
-                    onKeyPress={enterPressed}
+                    onKeyPress={(nativeEvent) => {
+                      enterPressed(nativeEvent, SearchArticle, valueRef);
+                    }}
                     style={{ fontSize: '0.8rem', width: '100%' }}
                   />
                   <IconButton onClick={() => { SearchArticle(valueRef.current.value); }}>

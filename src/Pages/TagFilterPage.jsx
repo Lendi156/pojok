@@ -32,6 +32,7 @@ const useStyles = makeStyles({
 });
 
 function TagFilterPage() {
+  // Get tag data from redux store and filter database using tag data
   const tagLabel = useSelector((state) => state.tagFilter.label);
   const filter = tagFilter(tagLabel);
   // Styling Component

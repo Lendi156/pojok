@@ -112,9 +112,10 @@ const useStyles = makeStyles({
 
 export default function EssayCard({ data }) {
   const dispatch = useDispatch();
+  // array to render card components
   const essayCardList = [];
 
-  // function to load more content
+  // limit essays loaded per page(5 essays)
   const [next, setNext] = useState(0);
   const postsPerPage = 5;
   const [postsToShow, setPostsToShow] = useState([]);
@@ -122,33 +123,34 @@ export default function EssayCard({ data }) {
     const slicedPosts = data.slice(start, end);
     setPostsToShow([...postsToShow, ...slicedPosts]);
   };
+  // view 5 more post
   const handleShowMorePosts = () => {
     loopWithSlice(next, next + postsPerPage);
     setNext(next + postsPerPage);
   };
+  // displaying first five post after component rendered
   useEffect(() => {
     loopWithSlice(next, postsPerPage);
   }, []);
 
-  // function to get id of card post
+  // get id of card post to be save in redux store
   const getId = (id) => {
     dispatch(idFound(id));
   };
+  // go to essay page
   const history = useHistory();
   const cardLink = () => {
     history.push('/Essay');
   };
 
-  // function to handle writer name link
+  // save writer data to redux store and stop link propagation
   const handleWriterLink = (writer, e) => {
     dispatch(writerFound(writer));
     e.stopPropagation();
   };
 
-  // Styling Component
+  // Styling component. Make card list from data source
   const classes = useStyles();
-
-  // create cards
   postsToShow.forEach((essay) => {
     essayCardList.push(
       <div

@@ -86,9 +86,9 @@ const useStyles = makeStyles({
 });
 
 function HomePage() {
-  // Styling Component
-  const mobile = useMediaQuery('(max-width:550px)');
+  // Styling Component. Changing font size of Typography based on device width
   const classes = useStyles();
+  const mobile = useMediaQuery('(max-width:550px)');
   return (
     <>
       <div className={classes.hero}>
