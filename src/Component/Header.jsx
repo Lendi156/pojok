@@ -26,6 +26,9 @@ const useStyles = makeStyles(() => ({
     ['@media (max-width:769px)']: {
       padding: '0 32px',
     },
+    ['@media (max-width:600px)']: {
+      justifyContent: 'center',
+    },
   },
   searchContainer: {
     position: 'absolute',
@@ -111,7 +114,7 @@ export default function Header() {
               component={Link}
               to="/"
               sx={{
-                display: 'content',
+                display: 'block',
                 color: 'black',
                 fontSize: '2.441rem',
                 fontFamily: 'Lato',
@@ -119,11 +122,7 @@ export default function Header() {
                 cursor: 'pointer',
                 letterSpacing: '-0.065em',
                 textDecoration: 'none',
-                width: '100%',
                 zIndex: '0',
-                ['@media (max-width:600px)']: {
-                  textAlign: 'center',
-                },
               }}
             >
               POJOK
