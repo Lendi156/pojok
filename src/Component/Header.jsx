@@ -12,8 +12,8 @@ import IconButton from '@mui/material/IconButton';
 import { ClickAwayListener } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { essayFound, displayingResult } from '../Redux/searchEssay';
-import detail from '../Data/DetailEssayData';
 import enterPressed from '../Utils/enterClickSearch';
+import searchFilter from '../Utils/searchFilter';
 
 const useStyles = makeStyles(() => ({
   toolBar: {
@@ -81,10 +81,7 @@ export default function Header() {
   // get input value from valueRev, save the value to redux store, and go to search page
   const SearchArticle = async (input) => {
     const keyword = input;
-    const filteredEssays = detail
-      .filter((essay) => essay.title
-        .toUpperCase()
-        .includes(keyword.toUpperCase()));
+    const filteredEssays = searchFilter(keyword);
 
     await dispatch(essayFound(filteredEssays));
     await dispatch(displayingResult(keyword));
