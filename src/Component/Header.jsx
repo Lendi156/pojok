@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import { ClickAwayListener } from '@mui/material';
+import { useHistory } from 'react-router-dom';
 import { essayFound, displayingResult } from '../Redux/searchEssay';
 import detail from '../Data/DetailEssayData';
 
@@ -74,6 +75,7 @@ const useStyles = makeStyles(() => ({
 
 export default function Header() {
   const dispatch = useDispatch();
+  const history = useHistory();
   // Handle input
   const SearchArticle = async (input) => {
     const keyword = input;
@@ -84,7 +86,7 @@ export default function Header() {
 
     await dispatch(essayFound(filteredEssays));
     await dispatch(displayingResult(keyword));
-    window.location.href = '/Search';
+    history.push('/Search');
   };
   const valueRef = useRef('');
   const enterPressed = (event) => {
@@ -104,7 +106,7 @@ export default function Header() {
   };
 
   function locations() {
-    window.location.href = '/';
+    history.push('/');
   }
   // Styling Component
   const classes = useStyles();
@@ -112,8 +114,8 @@ export default function Header() {
     <>
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" elevation={0}>
-          <Toolbar className={classes.toolBar} disableGutters="false">
-            <IconButton onClick={() => { locations(); }} disableRipple="true" disableFocusRipple="true" style={{ backgroundColor: 'transparent' }}>
+          <Toolbar className={classes.toolBar} disableGutters>
+            <IconButton onClick={() => { locations(); }} disableRipple disableFocusRipple style={{ backgroundColor: 'transparent' }}>
               <Typography
                 variant="h1"
                 noWrap

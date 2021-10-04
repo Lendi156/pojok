@@ -1,7 +1,8 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-useless-computed-key */
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Button } from '@mui/material';
@@ -29,6 +30,7 @@ const useStyles = makeStyles({
   card: {
     display: 'flex',
     margin: '0 0 24px 0',
+    cursor: 'pointer',
   },
   cardImage: {
     maxWidth: '310px',
@@ -132,6 +134,10 @@ export default function EssayCard({ data }) {
   const getId = (id) => {
     dispatch(idFound(id));
   };
+  const history = useHistory();
+  const cardLink = () => {
+    history.push('/Essay');
+  };
 
   // function to handle writer name link
   const handleWriterLink = (writer, e) => {
@@ -145,28 +151,35 @@ export default function EssayCard({ data }) {
   // create cards
   postsToShow.forEach((essay) => {
     essayCardList.push(
-      <Link to="/Essay" style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>
-        <div className={classes.card} id={essay.id} key={essay.id}>
-          <img src={EssayImage} alt="hero" className={classes.cardImage} />
-          <div className={classes.cardContent}>
-            <h2 className={classes.cardTitle}>{essay.title}</h2>
-            <div className={classes.essayWriterandDateContainer}>
-              <a className={classes.cardWriter} href="/Writer" onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}>
-                Oleh &nbsp;
-                <b className={classes.cardWriterBold}>
-                  {essay.writer}
-                </b>
-              </a>
-              <ScheduleIcon className={classes.cardDateIcon} sx={{ width: 16, height: 16 }} />
-              <p className={classes.cardDate}>
-                {essay.date}
-              </p>
-            </div>
-            <p className={classes.cardSummary}>{essay.summary}</p>
-            <CardTag className={classes.cardTag} essay={essay} />
+      <div
+        className={classes.card}
+        key={essay.id}
+        onClick={() => { getId(essay.id); cardLink(); }}
+        onKeyPress={() => {}}
+      >
+        <img src={EssayImage} alt="hero" className={classes.cardImage} />
+        <div className={classes.cardContent}>
+          <h2 className={classes.cardTitle}>{essay.title}</h2>
+          <div className={classes.essayWriterandDateContainer}>
+            <Link
+              to="/Writer"
+              onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}
+              className={classes.cardWriter}
+            >
+              Oleh &nbsp;
+              <b className={classes.cardWriterBold}>
+                {essay.writer}
+              </b>
+            </Link>
+            <ScheduleIcon className={classes.cardDateIcon} sx={{ width: 16, height: 16 }} />
+            <p className={classes.cardDate}>
+              {essay.date}
+            </p>
           </div>
+          <p className={classes.cardSummary}>{essay.summary}</p>
+          <CardTag className={classes.cardTag} essay={essay} />
         </div>
-      </Link>
+      </div>
       ,
     );
   });

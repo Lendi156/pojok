@@ -92,8 +92,10 @@ function Comment() {
   comment.forEach((person) => {
     commenList.push(
       <>
-        <p className={classes.commentName}>{person.name}</p>
-        <p className={classes.commentFill}>{person.fill}</p>
+        <div key={person.name}>
+          <p className={classes.commentName}>{person.name}</p>
+          <p className={classes.commentFill}>{person.fill}</p>
+        </div>
       </>,
     );
   });

@@ -3,6 +3,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 import { Avatar, useMediaQuery } from '@mui/material';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import AvatarImage from '../Public/Avatar.png';
@@ -84,7 +85,7 @@ export default function EssayTitleandWriter({ essay }) {
             width: mediaQuery(),
           }}
         />
-        <a className={classes.essayWriter} href="/Writer" onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}>{essay.writer}</a>
+        <Link className={classes.essayWriter} to="/Writer" onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}>{essay.writer}</Link>
         <ScheduleIcon className={classes.essayDateIcon} sx={{ width: 16, height: 16 }} />
         <p className={classes.essayDate}>
           {essay.date}

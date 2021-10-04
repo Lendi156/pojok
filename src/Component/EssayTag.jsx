@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { tagFound, toggleChip } from '../Redux/tagFilter';
 
@@ -24,9 +25,10 @@ function EssayTag({ tag }) {
   const dispatch = useDispatch();
   const topicList = [];
   // function to open tag filter page
+  const history = useHistory();
   const tagClick = (label) => {
     dispatch(tagFound(label));
-    window.location.href = '/Filter';
+    history.push('/Filter');
   };
 
   const handleToggle = (id) => {
@@ -37,7 +39,7 @@ function EssayTag({ tag }) {
   const classes = useStyles();
 
   tag.forEach((top) => {
-    topicList.push(<button className={classes.cardTag} type="button" onClick={() => { tagClick(top.label); handleToggle(top.label); }}>{top.label}</button>);
+    topicList.push(<button key={top.label} className={classes.cardTag} type="button" onClick={() => { tagClick(top.label); handleToggle(top.label); }}>{top.label}</button>);
   });
   return (
     <>

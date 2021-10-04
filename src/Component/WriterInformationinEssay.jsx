@@ -3,6 +3,7 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
 import AvatarImage from '../Public/Avatar.png';
@@ -78,13 +79,13 @@ export default function WriterInformationinEssay({ essay }) {
           }}
         />
         <div>
-          <a
-            href="/Writer"
+          <Link
+            to="/Writer"
             onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}
             className={classes.essayWriter}
           >
             {essay.writer}
-          </a>
+          </Link>
           <p className={classes.essayWriterDetail}>{essay.writerDetail}</p>
         </div>
       </div>

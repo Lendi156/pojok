@@ -81,8 +81,8 @@ export default function SideEssayCard({ data, firstTag }) {
 
   slicedPosts.forEach((essay) => {
     essayCardList.push(
-      <Link to="/Essay" style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>
-        <div className={classes.card} id={essay.id} key={essay.id}>
+      <Link to="/Essay" key={essay.id} style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>
+        <div className={classes.card} key={essay.id}>
           <img src={EssayImage} alt="logo" className={classes.cardImage} />
           <div>
             <p className={classes.cardTitle}>{essay.title}</p>

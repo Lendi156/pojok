@@ -1,5 +1,6 @@
 /* eslint-disable no-useless-computed-key */
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { tagFound, toggleChip } from '../Redux/tagFilter';
@@ -38,9 +39,10 @@ function Topics() {
   const tagLabel = useSelector((state) => state.tagFilter.tags);
   // eslint-disable-next-line no-unused-vars
   const topicList = [];
+  const history = useHistory();
   const tagClick = (label) => {
     dispatch(tagFound(label));
-    window.location.href = '/Filter';
+    history.push('/Filter');
   };
 
   const handleToggle = (id) => {
@@ -53,7 +55,7 @@ function Topics() {
   tagLabel.forEach((topic) => {
     // eslint-disable-next-line no-unused-vars
     topicList.push(
-      <button className={topic.status ? classes.tagOn : classes.tag} id={topic.label} type="button" onClick={() => { tagClick(topic.label); handleToggle(topic.label); }}>
+      <button className={topic.status ? classes.tagOn : classes.tag} key={topic.label} type="button" onClick={() => { tagClick(topic.label); handleToggle(topic.label); }}>
         {topic.label}
         {' '}
       </button>,

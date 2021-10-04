@@ -2,6 +2,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { tagFound, toggleChip } from '../Redux/tagFilter';
 import handleButtonClickInsideCard from '../Utils/handleButtonClickInsideCard';
@@ -23,9 +24,10 @@ const useStyles = makeStyles({
 
 export default function CardTag({ essay }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   const tagClick = (label) => {
     dispatch(tagFound(label));
-    window.location.href = '/Filter';
+    history.push('/Filter');
   };
   const handleToggle = (id) => {
     dispatch(toggleChip(id));

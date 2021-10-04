@@ -3,7 +3,7 @@
 import React from 'react';
 import './App.css';
 import {
-  Route, Switch,
+  Route, Switch, withRouter,
 } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import HomePage from './Pages/HomePage';
@@ -52,9 +52,9 @@ function App() {
         <Switch>
           <Route path="/" exact component={HomePage} />
           <Route path="/Essay" exact component={EssayPage} />
-          <Route path="/Search" exact component={SearchResultPage} />
-          <Route path="/Filter" exact component={TagFilterPage} />
-          <Route path="/Writer" exact component={WriterEssaysPage} />
+          <Route path="/Search" exact component={withRouter(SearchResultPage)} />
+          <Route path="/Filter" exact component={withRouter(TagFilterPage)} />
+          <Route path="/Writer" exact component={withRouter(WriterEssaysPage)} />
         </Switch>
       </main>
       <Footer />
