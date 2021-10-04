@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
-import { ClickAwayListener } from '@mui/material';
+import { ClickAwayListener, Link } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { essayFound, displayingResult } from '../Redux/searchEssay';
 import enterPressed from '../Utils/enterClickSearch';
@@ -104,28 +104,30 @@ export default function Header() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" elevation={0}>
           <Toolbar className={classes.toolBar} disableGutters>
-            <IconButton onClick={() => { history.push('/'); }} disableRipple disableFocusRipple style={{ backgroundColor: 'transparent' }}>
-              <Typography
-                variant="h1"
-                noWrap
-                component="div"
-                sx={{
-                  display: 'block',
-                  color: 'black',
-                  fontSize: '2.441rem',
-                  fontFamily: 'Lato',
-                  fontWeight: '300',
-                  letterSpacing: '-0.065em',
-                  width: '100%',
-                  zIndex: '0',
-                  ['@media (max-width:600px)']: {
-                    textAlign: 'center',
-                  },
-                }}
-              >
-                POJOK
-              </Typography>
-            </IconButton>
+            <Typography
+              variant="h1"
+              noWrap
+              onClick={() => { history.push('/'); }}
+              component={Link}
+              to="/"
+              sx={{
+                display: 'content',
+                color: 'black',
+                fontSize: '2.441rem',
+                fontFamily: 'Lato',
+                fontWeight: '300',
+                cursor: 'pointer',
+                letterSpacing: '-0.065em',
+                textDecoration: 'none',
+                width: '100%',
+                zIndex: '0',
+                ['@media (max-width:600px)']: {
+                  textAlign: 'center',
+                },
+              }}
+            >
+              POJOK
+            </Typography>
             <ClickAwayListener onClickAway={() => { handleClickAway(); }}>
               <div className={classes.searchContainer}>
                 <div className={mobile ? classes.searchIconMobile : classes.searchIcon}>
