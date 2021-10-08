@@ -4,7 +4,7 @@ import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
 import AvatarImage from '../Public/Avatar.png';
-import mediaQuery from '../Utils/mediaQuery';
+import { mediaQuery } from '../Utils/utils';
 
 const useStyles = makeStyles({
   essayWriterDetailContainer: {

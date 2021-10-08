@@ -8,9 +8,8 @@ import { makeStyles } from '@mui/styles';
 import { Button } from '@mui/material';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import EssayImage from '../Public/EssayImage.jpg';
-import { idFound } from '../Redux/openEssay';
-import { writerFound } from '../Redux/writerFilter';
 import CardTag from './CardTag';
+import { handleWriterLink, loopWithSlice, getId } from '../Utils/utils';
 
 const useStyles = makeStyles({
   containerListandButton: {
@@ -119,24 +118,24 @@ export default function EssayCard({ data }) {
   const [next, setNext] = useState(0);
   const postsPerPage = 5;
   const [postsToShow, setPostsToShow] = useState([]);
-  const loopWithSlice = (start, end) => {
-    const slicedPosts = data.slice(start, end);
-    setPostsToShow([...postsToShow, ...slicedPosts]);
-  };
+  // const loopWithSlice = (start, end) => {
+  //   const slicedPosts = data.slice(start, end);
+  //   setPostsToShow([...postsToShow, ...slicedPosts]);
+  // };
   // view 5 more post
   const handleShowMorePosts = () => {
-    loopWithSlice(next, next + postsPerPage);
+    loopWithSlice(next, next + postsPerPage, data, postsToShow, setPostsToShow);
     setNext(next + postsPerPage);
   };
   // displaying first five post after component rendered
   useEffect(() => {
-    loopWithSlice(next, postsPerPage);
+    loopWithSlice(next, postsPerPage, data, postsToShow, setPostsToShow);
   }, []);
 
   // get id of card post to be save in redux store
-  const getId = (id) => {
-    dispatch(idFound(id));
-  };
+  // const getId = (id) => {
+  //   dispatch(idFound(id));
+  // };
   // go to essay page
   const history = useHistory();
   const cardLink = () => {
@@ -144,10 +143,10 @@ export default function EssayCard({ data }) {
   };
 
   // save writer data to redux store and stop link propagation
-  const handleWriterLink = (writer, e) => {
-    dispatch(writerFound(writer));
-    e.stopPropagation();
-  };
+  // const handleWriterLink = (writer, e) => {
+  //   dispatch(writerFound(writer));
+  //   e.stopPropagation();
+  // };
 
   // Styling component. Make card list from data source
   const classes = useStyles();
@@ -156,7 +155,7 @@ export default function EssayCard({ data }) {
       <div
         className={classes.card}
         key={essay.id}
-        onClick={() => { getId(essay.id); cardLink(); }}
+        onClick={() => { getId(dispatch, essay.id); cardLink(); }}
         onKeyPress={() => {}}
       >
         <img src={EssayImage} alt="hero" className={classes.cardImage} />
@@ -165,7 +164,7 @@ export default function EssayCard({ data }) {
           <div className={classes.essayWriterandDateContainer}>
             <Link
               to="/Writer"
-              onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}
+              onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent, dispatch); }}
               className={classes.cardWriter}
             >
               Oleh &nbsp;

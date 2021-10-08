@@ -6,7 +6,7 @@ import { makeStyles } from '@mui/styles';
 import { Grid, useMediaQuery } from '@mui/material';
 import Topics from '../Component/Topics';
 import EssayCard from '../Component/EssayCard';
-import writeFilter from '../Utils/writerFilter';
+import { writeFilter } from '../Utils/utils';
 import WriterInformationinWriterFilter from '../Component/WriterInformationinWriterFilter';
 
 const useStyles = makeStyles({

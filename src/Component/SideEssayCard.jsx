@@ -7,7 +7,7 @@ import { makeStyles } from '@mui/styles';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import EssayImage from '../Public/EssayImage.jpg';
 import { idFound } from '../Redux/openEssay';
-import relatedFilter from '../Utils/relatedFilter';
+import { relatedFilter } from '../Utils/utils';
 
 const useStyles = makeStyles({
   card: {

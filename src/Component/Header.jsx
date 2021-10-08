@@ -12,8 +12,7 @@ import IconButton from '@mui/material/IconButton';
 import { ClickAwayListener, Link } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import { essayFound, displayingResult } from '../Redux/searchEssay';
-import enterPressed from '../Utils/enterClickSearch';
-import searchFilter from '../Utils/searchFilter';
+import { enterPressed, searchFilter } from '../Utils/utils';
 
 const useStyles = makeStyles(() => ({
   toolBar: {

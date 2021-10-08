@@ -10,7 +10,7 @@ import SideEssayCard from '../Component/SideEssayCard';
 import {
   saveLike, saveComment,
 } from '../Redux/likeandComment';
-import essayFilter from '../Utils/essayFilter';
+import { essayFilter } from '../Utils/utils';
 import LikeandCommentNumber from '../Component/LikeandCommentNumber';
 import Comment from '../Component/Comment';
 import WriterInformationinEssay from '../Component/WriterInformationinEssay';

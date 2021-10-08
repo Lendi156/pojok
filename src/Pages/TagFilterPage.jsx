@@ -6,7 +6,7 @@ import { makeStyles } from '@mui/styles';
 import { Grid } from '@mui/material';
 import Topics from '../Component/Topics';
 import EssayCard from '../Component/EssayCard';
-import tagFilter from '../Utils/tagFilter';
+import { tagFilter } from '../Utils/utils';
 
 const useStyles = makeStyles({
   main: {

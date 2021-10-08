@@ -11,7 +11,7 @@ import EssayPage from './Pages/EssayPage';
 import SearchResultPage from './Pages/SearchResultPage';
 import TagFilterPage from './Pages/TagFilterPage';
 import WriterEssaysPage from './Pages/WriterEssaysPage';
-import clearTagData from './Utils/clearTagData';
+import { clearTagData } from './Utils/utils';
 import Header from './Component/Header';
 import Footer from './Component/Footer';
 

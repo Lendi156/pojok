@@ -9,7 +9,7 @@ import ScheduleIcon from '@mui/icons-material/Schedule';
 import AvatarImage from '../Public/Avatar.png';
 import EssayImage from '../Public/EssayImage.jpg';
 import { writerFound } from '../Redux/writerFilter';
-import mediaQuery from '../Utils/mediaQuery';
+import { mediaQuery } from '../Utils/utils';
 
 const useStyles = makeStyles({
   essayTitle: {

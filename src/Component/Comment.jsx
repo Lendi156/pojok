@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Button, Input, useMediaQuery } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { addComment } from '../Redux/likeandComment';
-import mediaQuery from '../Utils/mediaQuery';
+import { mediaQuery } from '../Utils/utils';
 
 const useStyles = makeStyles({
   commentTitle: {
