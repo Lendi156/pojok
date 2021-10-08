@@ -6,8 +6,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import EssayImage from '../Public/EssayImage.jpg';
-import { idFound } from '../Redux/openEssay';
-import { relatedFilter } from '../Utils/utils';
+import { relatedFilter, getId } from '../Utils/utils';
 
 const useStyles = makeStyles({
   card: {
@@ -72,16 +71,16 @@ export default function SideEssayCard({ data, firstTag }) {
   const filter = relatedFilter(data, firstTag);
   const slicedPosts = filter.slice(0, 5);
 
-  // save card id to redux store
-  const getId = (id) => {
-    dispatch(idFound(id));
-  };
-
   // Styling Component. Make card list component from data source
   const classes = useStyles();
   slicedPosts.forEach((essay) => {
     essayCardList.push(
-      <Link to="/Essay" key={essay.id} style={{ textDecoration: 'none', color: 'black' }} onClick={() => { getId(essay.id); }}>
+      <Link
+        to="/Essay"
+        key={essay.id}
+        style={{ textDecoration: 'none', color: 'black' }}
+        onClick={() => { getId(dispatch, essay.id); }}
+      >
         <div className={classes.card} key={essay.id}>
           <img src={EssayImage} alt="logo" className={classes.cardImage} />
           <div>

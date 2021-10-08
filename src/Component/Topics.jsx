@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
-import { tagFound, toggleChip } from '../Redux/tagFilter';
+import { tagClick, handleToggle } from '../Utils/utils';
 
 const useStyles = makeStyles({
   tag: {
@@ -41,21 +41,19 @@ function Topics() {
   // array to render tag component,
   const topicList = [];
   const history = useHistory();
-  // save tag label data to redux store and go to tag filter page
-  const tagClick = (label) => {
-    dispatch(tagFound(label));
-    history.push('/Filter');
-  };
-  // save label value to the store to change data source status
-  const handleToggle = (id) => {
-    dispatch(toggleChip(id));
-  };
 
   // Styling component. Make topic component from data source
   const classes = useStyles();
   tagLabel.forEach((topic) => {
     topicList.push(
-      <button className={topic.status ? classes.tagOn : classes.tag} key={topic.label} type="button" onClick={() => { tagClick(topic.label); handleToggle(topic.label); }}>
+      <button
+        className={topic.status ? classes.tagOn : classes.tag}
+        key={topic.label}
+        type="button"
+        onClick={() => {
+          tagClick(dispatch, topic.label, history); handleToggle(dispatch, topic.label);
+        }}
+      >
         {topic.label}
         {' '}
       </button>,

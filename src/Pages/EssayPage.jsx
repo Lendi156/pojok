@@ -1,15 +1,11 @@
 /* eslint-disable no-useless-computed-key */
-/* eslint-disable max-len */
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Grid } from '@mui/material';
 import EssayTag from '../Component/EssayTag';
 import detail from '../Data/DetailEssayData';
 import SideEssayCard from '../Component/SideEssayCard';
-import {
-  saveLike, saveComment,
-} from '../Redux/likeandComment';
 import { essayFilter } from '../Utils/utils';
 import LikeandCommentNumber from '../Component/LikeandCommentNumber';
 import Comment from '../Component/Comment';
@@ -60,16 +56,16 @@ const useStyles = makeStyles({
 });
 
 function EssayPage() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   // get essay id data from redux store and filter data source using essay id data
   const essayID = useSelector((state) => state.open.id);
   const filteredEssays = essayFilter(essayID);
 
   // save like and comment data from datasource to redux store
-  useEffect(() => {
-    dispatch(saveLike(filteredEssays[0].like));
-    dispatch(saveComment(filteredEssays[0].comment));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(saveLike(filteredEssays[0].like));
+  //   dispatch(saveComment(filteredEssays[0].comment));
+  // }, []);
 
   // scroll restoration
   useEffect(() => {
@@ -95,7 +91,10 @@ function EssayPage() {
           </section>
 
           <section>
-            <LikeandCommentNumber />
+            <LikeandCommentNumber
+              savingLike={filteredEssays[0].like}
+              savingComment={filteredEssays[0].comment}
+            />
           </section>
 
           <section>

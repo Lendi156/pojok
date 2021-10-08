@@ -11,8 +11,9 @@ import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import { ClickAwayListener, Link } from '@mui/material';
 import { useHistory } from 'react-router-dom';
-import { essayFound, displayingResult } from '../Redux/searchEssay';
-import { enterPressed, searchFilter } from '../Utils/utils';
+import {
+  enterPressed, SearchArticle, searchButtonToggle, handleClickAway,
+} from '../Utils/utils';
 
 const useStyles = makeStyles(() => ({
   toolBar: {
@@ -80,26 +81,11 @@ export default function Header() {
   const dispatch = useDispatch();
   const history = useHistory();
   const valueRef = useRef('');
-  // get input value from valueRev, save the value to redux store, and go to search page
-  const SearchArticle = async (input) => {
-    const keyword = input;
-    const filteredEssays = searchFilter(keyword);
-
-    await dispatch(essayFound(filteredEssays));
-    await dispatch(displayingResult(keyword));
-    history.push('/Search');
-  };
 
   // styling component. Make search comonent icon exist in mobile device but disapear in desktop
   // and tab. Search icon control appearance of the search componenet
   const classes = useStyles();
   const [mobile, setMobile] = useState(false);
-  const searchButtonToggle = () => {
-    setMobile(true);
-  };
-  const handleClickAway = () => {
-    setMobile(false);
-  };
 
   return (
     <>
@@ -126,10 +112,10 @@ export default function Header() {
             >
               POJOK
             </Typography>
-            <ClickAwayListener onClickAway={() => { handleClickAway(); }}>
+            <ClickAwayListener onClickAway={() => { handleClickAway(setMobile); }}>
               <div className={classes.searchContainer}>
                 <div className={mobile ? classes.searchIconMobile : classes.searchIcon}>
-                  <IconButton onClick={() => { searchButtonToggle(); }}>
+                  <IconButton onClick={() => { searchButtonToggle(setMobile); }}>
                     <SearchIcon style={{ color: 'black', width: '24px', height: '24px' }} />
                   </IconButton>
                 </div>
@@ -140,11 +126,14 @@ export default function Header() {
                     placeholder="Search…"
                     inputProps={{ 'aria-label': 'search' }}
                     onKeyPress={(nativeEvent) => {
-                      enterPressed(nativeEvent, SearchArticle, valueRef);
+                      enterPressed(nativeEvent, SearchArticle, valueRef, dispatch, history);
                     }}
                     style={{ fontSize: '0.8rem', width: '100%' }}
                   />
-                  <IconButton onClick={() => { SearchArticle(valueRef.current.value); }}>
+                  <IconButton onClick={() => {
+                    SearchArticle(valueRef.current.value, dispatch, history);
+                  }}
+                  >
                     <SearchIcon style={{ color: 'black', width: '24px', height: '24px' }} />
                   </IconButton>
                 </div>

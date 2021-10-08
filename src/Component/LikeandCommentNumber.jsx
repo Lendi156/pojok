@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-useless-computed-key */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import IconButton from '@mui/material/IconButton';
 import { makeStyles } from '@mui/styles';
-import { addLike } from '../Redux/likeandComment';
+import { likeAdded, savingLikeAndComment } from '../Utils/utils';
 
 const useStyles = makeStyles({
   container: {
@@ -19,22 +20,22 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LikeandCommentNumber() {
+export default function LikeandCommentNumber({ savingLike, savingComment }) {
   const dispatch = useDispatch();
+  // save like and comment data from datasource to redux store
+  useEffect(() => {
+    savingLikeAndComment(dispatch, savingLike, savingComment);
+  }, []);
   // get like and comment data from redux store
   const like = useSelector((state) => state.likeandComment.like);
   const comment = useSelector((state) => state.likeandComment.comment);
-  // add +1 like to the reducx store
-  const likeAdded = () => {
-    dispatch(addLike());
-  };
 
   // Styling Component
   const classes = useStyles();
   return (
     <>
       <div className={classes.container}>
-        <IconButton onClick={() => { likeAdded(); }} style={{ padding: '0', marginRight: '8px' }}>
+        <IconButton onClick={() => { likeAdded(dispatch); }} style={{ padding: '0', marginRight: '8px' }}>
           <ThumbUpOutlinedIcon style={{ color: 'black', height: '24px' }} />
         </IconButton>
         <span>{like}</span>

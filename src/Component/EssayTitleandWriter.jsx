@@ -8,8 +8,7 @@ import { Avatar, useMediaQuery } from '@mui/material';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import AvatarImage from '../Public/Avatar.png';
 import EssayImage from '../Public/EssayImage.jpg';
-import { writerFound } from '../Redux/writerFilter';
-import { mediaQuery } from '../Utils/utils';
+import { mediaQuery, handleWriterLink } from '../Utils/utils';
 
 const useStyles = makeStyles({
   essayTitle: {
@@ -57,11 +56,6 @@ const useStyles = makeStyles({
 
 export default function EssayTitleandWriter({ essay }) {
   const dispatch = useDispatch();
-  // save writer data to redux store and stop link propagation
-  const handleWriterLink = (writer, e) => {
-    dispatch(writerFound(writer));
-    e.stopPropagation();
-  };
 
   // Styling Component. Change avatar styling based on device width
   const classes = useStyles();
@@ -80,7 +74,14 @@ export default function EssayTitleandWriter({ essay }) {
             width: mediaQuery(tab, '20px', '40px'),
           }}
         />
-        <Link className={classes.essayWriter} to="/Writer" onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}>{essay.writer}</Link>
+        <Link
+          className={classes.essayWriter}
+          to="/Writer"
+          onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent, dispatch); }}
+        >
+          {essay.writer}
+
+        </Link>
         <ScheduleIcon className={classes.essayDateIcon} sx={{ width: 16, height: 16 }} />
         <p className={classes.essayDate}>
           {essay.date}

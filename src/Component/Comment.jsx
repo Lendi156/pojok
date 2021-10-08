@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Button, Input, useMediaQuery } from '@mui/material';
 import Paper from '@mui/material/Paper';
-import { addComment } from '../Redux/likeandComment';
-import { mediaQuery } from '../Utils/utils';
+// import { addComment } from '../Redux/likeandComment';
+import { mediaQuery, commentAdded } from '../Utils/utils';
 
 const useStyles = makeStyles({
   commentTitle: {
@@ -81,16 +81,6 @@ function Comment() {
   const commenList = [];
   const comment = useSelector((state) => state.likeandComment.comment);
 
-  // get comment data, save new comment to redux store, and clear input field
-  const commentAdded = () => {
-    const newComment = {
-      name: valueRefName.current.value,
-      fill: valueRefComment.current.value,
-    };
-    dispatch(addComment(newComment));
-    valueRefName.current.value = '';
-    valueRefComment.current.value = '';
-  };
   // Styling Component. Make comment list from data source
   const classes = useStyles();
   comment.forEach((person) => {
@@ -118,7 +108,10 @@ function Comment() {
         </div>
         <Button
           variant="contained"
-          onClick={() => { commentAdded(); }}
+          onClick={() => {
+            commentAdded(dispatch, valueRefName.current.value,
+              valueRefComment.current.value);
+          }}
           disableElevation
           style={{
             fontSize: '0.64rem', borderRadius: '20px', backgroundColor: 'black', fontFamily: 'Lato', textTransform: 'capitalize', width: mediaQuery(breakPoint, '40vw', '20vw'),

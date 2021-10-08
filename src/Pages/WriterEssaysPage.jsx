@@ -43,7 +43,14 @@ function WriterEssaysPage() {
 
   return (
     <>
-      <Grid container className={classes.main} columnSpacing={4} direction="row-reverse" sx={{ justifyContent: 'flex-end' }} rowSpacing={{ xs: 2, md: 4 }}>
+      <Grid
+        container
+        className={classes.main}
+        columnSpacing={4}
+        direction="row-reverse"
+        sx={{ justifyContent: 'flex-end' }}
+        rowSpacing={{ xs: 2, md: 4 }}
+      >
         <Grid item lg={4} style={{ display: tab ? 'none' : 'block' }}>
           <h1 className={classes.title}>Topics</h1>
           <Topics />

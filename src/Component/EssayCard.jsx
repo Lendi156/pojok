@@ -9,7 +9,9 @@ import { Button } from '@mui/material';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import EssayImage from '../Public/EssayImage.jpg';
 import CardTag from './CardTag';
-import { handleWriterLink, loopWithSlice, getId } from '../Utils/utils';
+import {
+  handleWriterLink, loopWithSlice, getId, handleShowMorePosts, cardLink,
+} from '../Utils/utils';
 
 const useStyles = makeStyles({
   containerListandButton: {
@@ -111,6 +113,7 @@ const useStyles = makeStyles({
 
 export default function EssayCard({ data }) {
   const dispatch = useDispatch();
+  const history = useHistory();
   // array to render card components
   const essayCardList = [];
 
@@ -118,35 +121,9 @@ export default function EssayCard({ data }) {
   const [next, setNext] = useState(0);
   const postsPerPage = 5;
   const [postsToShow, setPostsToShow] = useState([]);
-  // const loopWithSlice = (start, end) => {
-  //   const slicedPosts = data.slice(start, end);
-  //   setPostsToShow([...postsToShow, ...slicedPosts]);
-  // };
-  // view 5 more post
-  const handleShowMorePosts = () => {
-    loopWithSlice(next, next + postsPerPage, data, postsToShow, setPostsToShow);
-    setNext(next + postsPerPage);
-  };
-  // displaying first five post after component rendered
   useEffect(() => {
     loopWithSlice(next, postsPerPage, data, postsToShow, setPostsToShow);
   }, []);
-
-  // get id of card post to be save in redux store
-  // const getId = (id) => {
-  //   dispatch(idFound(id));
-  // };
-  // go to essay page
-  const history = useHistory();
-  const cardLink = () => {
-    history.push('/Essay');
-  };
-
-  // save writer data to redux store and stop link propagation
-  // const handleWriterLink = (writer, e) => {
-  //   dispatch(writerFound(writer));
-  //   e.stopPropagation();
-  // };
 
   // Styling component. Make card list from data source
   const classes = useStyles();
@@ -155,7 +132,7 @@ export default function EssayCard({ data }) {
       <div
         className={classes.card}
         key={essay.id}
-        onClick={() => { getId(dispatch, essay.id); cardLink(); }}
+        onClick={() => { getId(dispatch, essay.id); cardLink(history); }}
         onKeyPress={() => {}}
       >
         <img src={EssayImage} alt="hero" className={classes.cardImage} />
@@ -195,9 +172,23 @@ export default function EssayCard({ data }) {
           variant="outlined"
           className={classes.loadMore}
           style={{
-            fontSize: '0.64rem', borderRadius: '0', borderColor: 'black', color: 'black', fontFamily: 'Lato', textTransform: 'capitalize',
+            fontSize: '0.64rem',
+            borderRadius: '0',
+            borderColor: 'black',
+            color: 'black',
+            fontFamily: 'Lato',
+            textTransform: 'capitalize',
           }}
-          onClick={handleShowMorePosts}
+          onClick={() => {
+            handleShowMorePosts(
+              next,
+              setNext,
+              postsPerPage,
+              data,
+              postsToShow,
+              setPostsToShow,
+            );
+          }}
         >
           Muat lebih banyak
         </Button>

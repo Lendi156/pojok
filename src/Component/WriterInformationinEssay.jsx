@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
 import AvatarImage from '../Public/Avatar.png';
-import { writerFound } from '../Redux/writerFilter';
-import { mediaQuery } from '../Utils/utils';
+import { mediaQuery, handleWriterLink } from '../Utils/utils';
 
 const useStyles = makeStyles({
   essayWriterDetailContainer: {
@@ -50,11 +49,6 @@ const useStyles = makeStyles({
 
 export default function WriterInformationinEssay({ essay }) {
   const dispatch = useDispatch();
-  // save writer data to redux store and stop link propagation
-  const handleWriterLink = (writer, e) => {
-    dispatch(writerFound(writer));
-    e.stopPropagation();
-  };
 
   // Styling Component. Change Avatar styling based on device width
   const classes = useStyles();
@@ -75,7 +69,7 @@ export default function WriterInformationinEssay({ essay }) {
         <div>
           <Link
             to="/Writer"
-            onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent); }}
+            onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent, dispatch); }}
             className={classes.essayWriter}
           >
             {essay.writer}
