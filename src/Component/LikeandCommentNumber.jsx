@@ -29,7 +29,7 @@ export default function LikeandCommentNumber({ id }) {
     const newComment = await displayingLikeandComment.commentNumber(id);
     setLike(newLike);
     setComment(newComment);
-  }, []);
+  }, [id]);
 
   // Styling Component
   const classes = useStyles();
