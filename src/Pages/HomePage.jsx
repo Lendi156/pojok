@@ -7,7 +7,7 @@ import Hero from '../Public/Hero.jpg';
 import Topics from '../Component/Topics';
 import EssayCard from '../Component/EssayCard';
 import detail from '../Data/DetailEssayData';
-import { saveLiDatatoIndexedDB } from '../Utils/utils';
+import { saveLikeDatatoIndexedDB } from '../Utils/utils';
 
 const useStyles = makeStyles({
   hero: {
@@ -97,7 +97,7 @@ function HomePage() {
         comment: essay.comment,
       });
     });
-    saveLiDatatoIndexedDB.saveData(IdbData);
+    saveLikeDatatoIndexedDB.saveData(IdbData);
   }, []);
 
   // Styling Component. Changing font size of Typography based on device width

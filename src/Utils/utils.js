@@ -6,7 +6,7 @@ import { matchSorter } from 'match-sorter';
 import { clearChip, tagFound, toggleChip } from '../Redux/tagFilter';
 import detail from '../Data/DetailEssayData';
 import {
-  addComment, addLike, saveLike, saveComment,
+  addComment,
 } from '../Redux/likeandComment';
 import { idFound } from '../Redux/openEssay';
 import { writerFound } from '../Redux/writerFilter';
@@ -138,17 +138,17 @@ export const handleClickAway = (setMobile) => {
 };
 
 // add +1 like to the reducx store
-export const likeAdded = (dispatch) => {
-  dispatch(addLike());
-};
+// export const likeAdded = (dispatch) => {
+//   dispatch(addLike());
+// };
 
-// add +1 like to the reducx store
-export const savingLikeAndComment = (dispatch, like, comment, savingLike, savingComment) => {
-  dispatch(saveLike(savingLike));
-  dispatch(saveComment(savingComment));
-};
+// // add +1 like to the reducx store
+// export const savingLikeAndComment = (dispatch, like, comment, savingLike, savingComment) => {
+//   dispatch(saveLike(savingLike));
+//   dispatch(saveComment(savingComment));
+// };
 
-export const saveLiDatatoIndexedDB = {
+export const saveLikeDatatoIndexedDB = {
   async saveData(essays) {
     const recentData = await likeAndCommentEssaysIdb.getAllEssays();
     if (recentData.length === 0) {
