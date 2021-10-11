@@ -1,12 +1,15 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-useless-computed-key */
 import React, { useRef, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Button, Input, useMediaQuery } from '@mui/material';
 import Paper from '@mui/material/Paper';
 // import { addComment } from '../Redux/likeandComment';
-import { mediaQuery, commentAdded, displayingLikeandComment } from '../Utils/utils';
+import {
+  mediaQuery,
+  displayingLikeandComment,
+  changeLikeandComment,
+} from '../Utils/utils';
 
 const useStyles = makeStyles({
   commentTitle: {
@@ -74,7 +77,6 @@ const useStyles = makeStyles({
 });
 
 function Comment({ id }) {
-  const dispatch = useDispatch();
   const valueRefName = useRef('');
   const valueRefComment = useRef('');
   const [comment, setComment] = useState([]);
@@ -114,8 +116,14 @@ function Comment({ id }) {
         <Button
           variant="contained"
           onClick={() => {
-            commentAdded(dispatch, valueRefName.current.value,
-              valueRefComment.current.value);
+            changeLikeandComment.addComment(
+              id,
+              valueRefName.current.value,
+              valueRefComment.current.value,
+              setComment,
+            );
+            valueRefName.current.value = null;
+            valueRefComment.current.value = null;
           }}
           disableElevation
           style={{

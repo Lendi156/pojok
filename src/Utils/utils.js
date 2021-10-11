@@ -189,10 +189,15 @@ export const changeLikeandComment = {
     likeAndCommentEssaysIdb.putEssay(newEssay);
   },
 
-  async addComment(id, newComment) {
-    const essay = likeAndCommentEssaysIdb.getEssay(id);
+  async addComment(id, commentName, commentFill, setComment) {
+    const essay = await likeAndCommentEssaysIdb.getEssay(id);
     const { comment } = essay;
+    const newComment = {
+      name: commentName,
+      fill: commentFill,
+    };
     const commentUpdate = [...comment, newComment];
+    setComment(commentUpdate);
     const newEssay = { ...essay, comment: commentUpdate };
     likeAndCommentEssaysIdb.putEssay(newEssay);
   },
