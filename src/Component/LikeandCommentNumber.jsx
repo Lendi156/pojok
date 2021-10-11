@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-useless-computed-key */
 import React, { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import IconButton from '@mui/material/IconButton';
 import { makeStyles } from '@mui/styles';
-import { likeAdded, displayingLikeandComment } from '../Utils/utils';
+import { displayingLikeandComment, changeLikeandComment } from '../Utils/utils';
 
 const useStyles = makeStyles({
   container: {
@@ -21,7 +20,6 @@ const useStyles = makeStyles({
 });
 
 export default function LikeandCommentNumber({ id }) {
-  const dispatch = useDispatch();
   const [like, setLike] = useState();
   const [comment, setComment] = useState();
 
@@ -38,7 +36,7 @@ export default function LikeandCommentNumber({ id }) {
   return (
     <>
       <div className={classes.container}>
-        <IconButton onClick={() => { likeAdded(dispatch); }} style={{ padding: '0', marginRight: '8px' }}>
+        <IconButton onClick={() => { changeLikeandComment.addLike(id, setLike); }} style={{ padding: '0', marginRight: '8px' }}>
           <ThumbUpOutlinedIcon style={{ color: 'black', height: '24px' }} />
         </IconButton>
         <span>{like}</span>

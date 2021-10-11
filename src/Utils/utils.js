@@ -150,8 +150,8 @@ export const savingLikeAndComment = (dispatch, like, comment, savingLike, saving
 
 export const saveLiDatatoIndexedDB = {
   async saveData(essays) {
-    const recentData = likeAndCommentEssaysIdb.getAllEssays();
-    if (recentData) {
+    const recentData = await likeAndCommentEssaysIdb.getAllEssays();
+    if (recentData.length === 0) {
       essays.forEach((essay) => {
         likeAndCommentEssaysIdb.putEssay(essay);
       });
@@ -180,10 +180,11 @@ export const displayingLikeandComment = {
 };
 
 export const changeLikeandComment = {
-  async addLike(id) {
-    const essay = likeAndCommentEssaysIdb.getEssay(id);
+  async addLike(id, setLike) {
+    const essay = await likeAndCommentEssaysIdb.getEssay(id);
     const { like } = essay;
     const newLike = like + 1;
+    setLike(newLike);
     const newEssay = { ...essay, like: newLike };
     likeAndCommentEssaysIdb.putEssay(newEssay);
   },
