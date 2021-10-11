@@ -1,5 +1,5 @@
 /* eslint-disable no-useless-computed-key */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid, useMediaQuery } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
@@ -7,6 +7,7 @@ import Hero from '../Public/Hero.jpg';
 import Topics from '../Component/Topics';
 import EssayCard from '../Component/EssayCard';
 import detail from '../Data/DetailEssayData';
+import { saveLiDatatoIndexedDB } from '../Utils/utils';
 
 const useStyles = makeStyles({
   hero: {
@@ -86,6 +87,19 @@ const useStyles = makeStyles({
 });
 
 function HomePage() {
+  // Save like and comment data from datasource to indexedDB
+  useEffect(() => {
+    const IdbData = [];
+    detail.forEach((essay) => {
+      IdbData.push({
+        id: essay.id,
+        like: essay.like,
+        comment: essay.comment,
+      });
+    });
+    saveLiDatatoIndexedDB.saveData(IdbData);
+  }, []);
+
   // Styling Component. Changing font size of Typography based on device width
   const classes = useStyles();
   const mobile = useMediaQuery('(max-width:550px)');

@@ -92,8 +92,7 @@ function EssayPage() {
 
           <section>
             <LikeandCommentNumber
-              savingLike={filteredEssays[0].like}
-              savingComment={filteredEssays[0].comment}
+              id={filteredEssays[0].id}
             />
           </section>
 

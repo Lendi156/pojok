@@ -1,12 +1,12 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-useless-computed-key */
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
 import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutlineOutlined';
 import IconButton from '@mui/material/IconButton';
 import { makeStyles } from '@mui/styles';
-import { likeAdded, savingLikeAndComment } from '../Utils/utils';
+import { likeAdded, displayingLikeandComment } from '../Utils/utils';
 
 const useStyles = makeStyles({
   container: {
@@ -20,15 +20,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LikeandCommentNumber({ savingLike, savingComment }) {
+export default function LikeandCommentNumber({ id }) {
   const dispatch = useDispatch();
-  // save like and comment data from datasource to redux store
-  useEffect(() => {
-    savingLikeAndComment(dispatch, savingLike, savingComment);
+  const [like, setLike] = useState();
+  const [comment, setComment] = useState();
+
+  // display like and comment data from indexedDb
+  useEffect(async () => {
+    const newLike = await displayingLikeandComment.likeNumber(id);
+    const newComment = await displayingLikeandComment.commentNumber(id);
+    setLike(newLike);
+    setComment(newComment);
   }, []);
-  // get like and comment data from redux store
-  const like = useSelector((state) => state.likeandComment.like);
-  const comment = useSelector((state) => state.likeandComment.comment);
 
   // Styling Component
   const classes = useStyles();
@@ -42,7 +45,7 @@ export default function LikeandCommentNumber({ savingLike, savingComment }) {
         <IconButton style={{ padding: '0', margin: '0 8px 0 24px' }}>
           <ChatBubbleOutlineOutlinedIcon style={{ color: 'black', height: '24px' }} />
         </IconButton>
-        <span>{comment.length}</span>
+        <span>{comment}</span>
       </div>
     </>
   );
