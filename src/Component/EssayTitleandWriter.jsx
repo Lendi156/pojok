@@ -78,6 +78,9 @@ export default function EssayTitleandWriter({ essay }) {
           className={classes.essayWriter}
           to="/Writer"
           onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent, dispatch); }}
+          onContextMenu={(nativeEvent) => {
+            handleWriterLink(essay.writer, nativeEvent, dispatch);
+          }}
         >
           {essay.writer}
 

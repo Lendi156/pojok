@@ -141,7 +141,12 @@ export default function EssayCard({ data }) {
           <div className={classes.essayWriterandDateContainer}>
             <Link
               to="/Writer"
-              onClick={(nativeEvent) => { handleWriterLink(essay.writer, nativeEvent, dispatch); }}
+              onClick={(nativeEvent) => {
+                handleWriterLink(essay.writer, nativeEvent, dispatch);
+              }}
+              onContextMenu={(nativeEvent) => {
+                handleWriterLink(essay.writer, nativeEvent, dispatch);
+              }}
               className={classes.cardWriter}
             >
               Oleh &nbsp;

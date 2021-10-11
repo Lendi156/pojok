@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import storageSession from 'redux-persist/lib/storage/session';
+import storage from 'redux-persist/lib/storage';
 import {
   persistReducer, persistStore,
 } from 'redux-persist';
@@ -13,7 +13,7 @@ import likeandCommentReducer from './likeandComment';
 
 const persistConfig = {
   key: 'root',
-  storage: storageSession,
+  storage,
 };
 
 const reducers = combineReducers({

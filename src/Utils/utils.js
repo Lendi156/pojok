@@ -52,8 +52,8 @@ export const getId = (dispatch, id) => {
 };
 
 // save writer data to redux store and stop link propagation
-export const handleWriterLink = (writer, e, dispatch) => {
-  dispatch(writerFound(writer));
+export const handleWriterLink = async (writer, e, dispatch) => {
+  await dispatch(writerFound(writer));
   e.stopPropagation();
 };
 
