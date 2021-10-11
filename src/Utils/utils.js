@@ -11,7 +11,6 @@ import {
 import { idFound } from '../Redux/openEssay';
 import { writerFound } from '../Redux/writerFilter';
 import { essayFound, displayingResult } from '../Redux/searchEssay';
-import likeAndCommentEssaysIdb from '../Data/Essays-idb';
 
 export const clearTagData = () => {
   const dispatch = useDispatch();
@@ -143,56 +142,7 @@ export const likeAdded = (dispatch) => {
 };
 
 // add +1 like to the reducx store
-export const savingLikeAndComment = (dispatch, like, comment, savingLike, savingComment) => {
+export const savingLikeAndComment = (dispatch, savingLike, savingComment) => {
   dispatch(saveLike(savingLike));
   dispatch(saveComment(savingComment));
-};
-
-export const saveLiDatatoIndexedDB = {
-  async saveData(essays) {
-    const recentData = likeAndCommentEssaysIdb.getAllEssays();
-    if (recentData) {
-      essays.forEach((essay) => {
-        likeAndCommentEssaysIdb.putEssay(essay);
-      });
-    }
-  },
-};
-
-export const displayingLikeandComment = {
-  async likeNumber(id) {
-    const essay = await likeAndCommentEssaysIdb.getEssay(id);
-    const { like } = essay;
-    return like;
-  },
-
-  async commentNumber(id) {
-    const essay = await likeAndCommentEssaysIdb.getEssay(id);
-    const { comment } = essay;
-    return comment.length;
-  },
-
-  async comment(id) {
-    const essay = likeAndCommentEssaysIdb.getEssay(id);
-    const { comment } = essay;
-    return comment;
-  },
-};
-
-export const changeLikeandComment = {
-  async addLike(id) {
-    const essay = likeAndCommentEssaysIdb.getEssay(id);
-    const { like } = essay;
-    const newLike = like + 1;
-    const newEssay = { ...essay, like: newLike };
-    likeAndCommentEssaysIdb.putEssay(newEssay);
-  },
-
-  async addComment(id, newComment) {
-    const essay = likeAndCommentEssaysIdb.getEssay(id);
-    const { comment } = essay;
-    const commentUpdate = [...comment, newComment];
-    const newEssay = { ...essay, comment: commentUpdate };
-    likeAndCommentEssaysIdb.putEssay(newEssay);
-  },
 };
