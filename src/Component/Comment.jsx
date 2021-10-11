@@ -1,11 +1,12 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-useless-computed-key */
-import React, { useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useRef, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { makeStyles } from '@mui/styles';
 import { Button, Input, useMediaQuery } from '@mui/material';
 import Paper from '@mui/material/Paper';
 // import { addComment } from '../Redux/likeandComment';
-import { mediaQuery, commentAdded } from '../Utils/utils';
+import { mediaQuery, commentAdded, displayingLikeandComment } from '../Utils/utils';
 
 const useStyles = makeStyles({
   commentTitle: {
@@ -72,14 +73,18 @@ const useStyles = makeStyles({
   },
 });
 
-function Comment() {
+function Comment({ id }) {
   const dispatch = useDispatch();
   const valueRefName = useRef('');
   const valueRefComment = useRef('');
+  const [comment, setComment] = useState([]);
 
   // array to render comment component, get comment data from redux store,
   const commenList = [];
-  const comment = useSelector((state) => state.likeandComment.comment);
+  useEffect(async () => {
+    const newComment = await displayingLikeandComment.comment(id);
+    setComment(newComment);
+  }, [id]);
 
   // Styling Component. Make comment list from data source
   const classes = useStyles();

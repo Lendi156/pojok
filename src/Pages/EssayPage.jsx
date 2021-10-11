@@ -101,7 +101,7 @@ function EssayPage() {
           </section>
 
           <section>
-            <Comment />
+            <Comment id={filteredEssays[0].id} />
           </section>
         </Grid>
         <Grid item lg={4}>

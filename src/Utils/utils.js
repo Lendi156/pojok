@@ -173,7 +173,7 @@ export const displayingLikeandComment = {
   },
 
   async comment(id) {
-    const essay = likeAndCommentEssaysIdb.getEssay(id);
+    const essay = await likeAndCommentEssaysIdb.getEssay(id);
     const { comment } = essay;
     return comment;
   },
