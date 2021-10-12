@@ -9,7 +9,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import Typography from '@mui/material/Typography';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
-import { ClickAwayListener, Link } from '@mui/material';
+import { ClickAwayListener } from '@mui/material';
 import { useHistory } from 'react-router-dom';
 import {
   enterPressed, SearchArticle, searchButtonToggle, handleClickAway,
@@ -65,6 +65,9 @@ const useStyles = makeStyles(() => ({
     borderRadius: '37px',
     width: 'calc(100vw - 64px)',
     backgroundColor: 'white',
+    ['@media (max-width:550px)']: {
+      width: 'calc(100vw - 32px)',
+    },
   },
   searchIcon: {
     display: 'none',
@@ -92,26 +95,26 @@ export default function Header() {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position="static" elevation={0}>
           <Toolbar className={classes.toolBar} disableGutters>
-            <Typography
-              variant="h1"
-              noWrap
-              onClick={() => { history.push('/'); }}
-              component={Link}
-              to="/"
-              sx={{
-                display: 'block',
-                color: 'black',
-                fontSize: '2.441rem',
-                fontFamily: 'Lato',
-                fontWeight: '300',
-                cursor: 'pointer',
-                letterSpacing: '-0.065em',
-                textDecoration: 'none',
-                zIndex: '0',
-              }}
-            >
-              POJOK
-            </Typography>
+            <Box onClick={() => { history.push('/'); }}>
+              <Typography
+                variant="h1"
+                noWrap
+                component="div"
+                sx={{
+                  display: 'block',
+                  color: 'black',
+                  fontSize: '2.441rem',
+                  fontFamily: 'Lato',
+                  fontWeight: '300',
+                  cursor: 'pointer',
+                  letterSpacing: '-0.065em',
+                  textDecoration: 'none',
+                  zIndex: '0',
+                }}
+              >
+                POJOK
+              </Typography>
+            </Box>
             <ClickAwayListener onClickAway={() => { handleClickAway(setMobile); }}>
               <div className={classes.searchContainer}>
                 <div className={mobile ? classes.searchIconMobile : classes.searchIcon}>
