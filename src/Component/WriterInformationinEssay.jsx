@@ -6,7 +6,6 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
-import AvatarImage from '../Public/Avatar.png';
 import { mediaQuery, handleWriterLink } from '../Utils/utils';
 
 const useStyles = makeStyles({
@@ -59,7 +58,7 @@ export default function WriterInformationinEssay({ essay }) {
       <div className={classes.essayWriterDetailContainer}>
         <Avatar
           alt={essay.writer}
-          src={AvatarImage}
+          src={essay.avatar}
           className={classes.essayAvatar}
           style={{
             height: mediaQuery(tab, '50px', '90px'),

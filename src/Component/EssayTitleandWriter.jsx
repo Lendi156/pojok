@@ -6,7 +6,6 @@ import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 import { Avatar, useMediaQuery } from '@mui/material';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import AvatarImage from '../Public/Avatar.png';
 import EssayImage from '../Public/EssayImage.jpg';
 import { mediaQuery, handleWriterLink } from '../Utils/utils';
 
@@ -67,7 +66,7 @@ export default function EssayTitleandWriter({ essay }) {
       <div className={classes.essayWriterandDateContainer}>
         <Avatar
           alt={essay.writer}
-          src={AvatarImage}
+          src={essay.avatar}
           className={classes.essayAvatar}
           style={{
             height: mediaQuery(tab, '20px', '40px'),

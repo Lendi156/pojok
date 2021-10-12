@@ -3,7 +3,6 @@
 import React from 'react';
 import { makeStyles } from '@mui/styles';
 import { Avatar, useMediaQuery } from '@mui/material';
-import AvatarImage from '../Public/Avatar.png';
 import { mediaQuery } from '../Utils/utils';
 
 const useStyles = makeStyles({
@@ -37,7 +36,7 @@ export default function WriterInformationinWriterFilter({ name, detail }) {
       <div className={classes.essayWriterDetailContainer}>
         <Avatar
           alt={name}
-          src={AvatarImage}
+          src={detail.avatar}
           className={classes.essayAvatar}
           style={{
             height: mediaQuery(tab, '60px', '120px'),
